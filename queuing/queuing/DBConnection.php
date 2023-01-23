@@ -1,8 +1,9 @@
 <?php
+//date_default_timezone_set('America/Managua');
 if(!is_dir(__DIR__.'../db'))
     //mkdir(__DIR__.'../db');
 if(!defined("db_file")) define('db_file',__DIR__.'../db/cashier_queuing_db.db');
-if(!defined('tZone')) define('tZone',"America/Bogota");
+if(!defined('tZone')) define('tZone',"America/Managua");
 //if(!defined('tZone')) define('tZone',"Asia/Manila");
 if(!defined('dZone')) define('dZone',ini_get('date.timezone'));
 function my_udf_md5($string) {
@@ -31,6 +32,7 @@ Class DBConnection extends SQLite3{
             `log_status` INTEGER NOT NULL DEFAULT 0,
             `status` INTEGER NOT NULL DEFAULT 1
         )");
+        
         $this->exec("CREATE TABLE IF NOT EXISTS `queue_list` (
             `queue_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             `queue` TEXT NOT NULL,
@@ -38,6 +40,14 @@ Class DBConnection extends SQLite3{
             `status` INTEGER NOT NULL DEFAULT 0,
             `date_created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )");
+
+        // $this->exec("CREATE TABLE IF NOT EXISTS `queue_list` (
+        //     `queue_id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        //     `queue` TEXT NOT NULL,
+        //     `customer_name` Text NOT NULL,
+        //     `status` INTEGER NOT NULL DEFAULT 0,
+        //     `date_created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        // )");
 
 
         // $this->exec("CREATE TABLE IF NOT EXISTS `ticket_list` (

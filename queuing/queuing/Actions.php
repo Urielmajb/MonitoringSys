@@ -231,6 +231,7 @@ Class Actions extends DBConnection{
         
         return json_encode($resp);
     }
+
     function save_queue(){
         $code = sprintf("%'.04d",1);
         while(true){
@@ -241,6 +242,8 @@ Class Actions extends DBConnection{
                 break;
             }
         }
+
+
         $_POST['queue'] = $code;
         extract($_POST);
         $sql = "INSERT INTO `queue_list` (`queue`,`customer_name`) VALUES('{$queue}','{$customer_name}')";
@@ -254,6 +257,7 @@ Class Actions extends DBConnection{
         }
         return json_encode($resp);
     }
+
     function get_queue(){
         extract($_POST);
         $qry = $this->query("SELECT * FROM `queue_list` where queue_id = '{$qid}' ");
@@ -268,6 +272,7 @@ Class Actions extends DBConnection{
         }
         return json_encode($resp);
     }
+
     function next_queue(){
         extract($_POST);
         $get = $this->query("SELECT queue_id,`queue`,customer_name FROM `queue_list` where status = 0 and date(date_created) = '".date("Y-m-d")."' order by queue_id asc  limit 1");
@@ -281,6 +286,7 @@ Class Actions extends DBConnection{
         }
         return json_encode($resp);
     }
+
     function update_video(){
         extract($_FILES);
         $mime = mime_content_type($vid['tmp_name']);

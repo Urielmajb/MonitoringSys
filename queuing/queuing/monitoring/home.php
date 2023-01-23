@@ -40,6 +40,7 @@
     </div>
 </div>
 
+
 <script>
     var websocket = new WebSocket("ws://<?php echo $_SERVER['SERVER_NAME'] ?>:2306/queuing/php-sockets.php"); 
     websocket.onopen = function(event) { 
@@ -54,18 +55,17 @@
     let tts = new SpeechSynthesisUtterance();
     tts.lang = "es-CR"; 
     
-    //let tts = new SpeechSynthesisUtterance();
-    //tts.lang = "en"; 
-    
     tts.voice = window.speechSynthesis.getVoices()[0] ; 
     let notif_audio = new Audio("../audio/ascend.mp3")
     let vid_loop = $('#loop-vid')[0]
     tts.onstart= ()=>{
         vid_loop.pause()
     }
+
     notif_audio.setAttribute('muted',true)
     notif_audio.setAttribute('autoplay',true)
     document.querySelector('body').appendChild(notif_audio)
+    
     function speak($text=""){
         if($text == '')
         return false;
@@ -74,11 +74,12 @@
         notif_audio.play()
         setTimeout(() => {
             window.speechSynthesis.speak(tts); 
-           tts.onend= ()=>{
+                tts.onend= ()=>{
                 vid_loop.play()
             }
         }, 500);
     }
+
     function time_loop(){
         var hour,min,ampm,mo,d,yr,s;
         let mos = ['','January','Febuary','March','April','May','June','July','August','September','October','November','December']
@@ -129,12 +130,13 @@
                         nitem.hide('slow')
                     }else{
                         nitem.show('slow')
-                        speak("Queue Number "+(Math.abs(resp.queue))+resp.name+", Please proceed to "+cashier)
+                        speak("NUMERO "+(Math.abs(resp.queue))+resp.name+", Favor Proceder a "+cashier)
                     }
                 }
             }
         })
     }
+
     $(function(){
         setInterval(() => {
             time_loop()
