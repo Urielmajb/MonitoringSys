@@ -42,64 +42,77 @@
 
 
 <script>
+    
     var websocket = new WebSocket("ws://<?php echo $_SERVER['SERVER_NAME'] ?>:2306/queuing/php-sockets.php"); 
     websocket.onopen = function(event) { 
-      console.log('socket is open!')
+    console.log('socket is open!')
 		}
     websocket.onclose = function(event){
-      console.log('socket has been closed!')
+    console.log('socket has been closed!')
     var websocket = new WebSocket("ws://<?php echo $_SERVER['SERVER_NAME'] ?>:2306/queuing/php-sockets.php"); 
     };
 
-
-    let tts = new SpeechSynthesisUtterance();
-    tts.lang = "es-CR"; 
+// let tts = new SpeechSynthesisUtterance();
+// tts.lang = "en"; 
+// tts.voice = window.speechSynthesis.getVoices()[0] ; 
     
-    tts.voice = window.speechSynthesis.getVoices()[0] ; 
-    let notif_audio = new Audio("../audio/ascend.mp3")
-    let vid_loop = $('#loop-vid')[0]
-    tts.onstart= ()=>{
-        vid_loop.pause()
+const tts = new SpeechSynthesisUtterance();
+tts.lang = "es-MX";
+var voices = window.speechSynthesis.getVoices();
+tts.voice = voices.filter(function(voice) { return voice.name == 'Paulina'; })[0];
+//tts.voice = window.speechSynthesis.getVoices().find(voice => voice.startsWith(lang))
+
+let notif_audio = new Audio("../audio/ascend.mp3")
+let vid_loop = $('#loop-vid')[0]
+
+tts.onstart= ()=>
+{
+    vid_loop.pause()
+}
+
+notif_audio.setAttribute('muted',true)
+notif_audio.setAttribute('autoplay',true)
+document.querySelector('body').appendChild(notif_audio)
+    
+function speak($text=""){
+    if($text == '')
+    return false;
+    tts.lang = "es-MX";
+    tts.text = $text; 
+    notif_audio.setAttribute('muted',false)
+    notif_audio.play()
+        
+    setTimeout(() => {
+        window.speechSynthesis.speak(tts); 
+        tts.onend= ()=>{
+        vid_loop.play()
     }
-
-    notif_audio.setAttribute('muted',true)
-    notif_audio.setAttribute('autoplay',true)
-    document.querySelector('body').appendChild(notif_audio)
-    
-    function speak($text=""){
-        if($text == '')
-        return false;
-        tts.text = $text; 
-        notif_audio.setAttribute('muted',false)
-        notif_audio.play()
-        setTimeout(() => {
-            window.speechSynthesis.speak(tts); 
-                tts.onend= ()=>{
-                vid_loop.play()
-            }
-        }, 500);
+    }, 500);
     }
 
     function time_loop(){
         var hour,min,ampm,mo,d,yr,s;
-        let mos = ['','January','Febuary','March','April','May','June','July','August','September','October','November','December']
+        //let mos = ['','January','Febuary','March','April','May','June','July','August','September','October','November','December']
         var datetime = new Date();
         hour = datetime.getHours()
         min = datetime.getMinutes()
         s = datetime.getSeconds()
         ampm = hour >= 12 ? "PM" : "AM";
-        mo = mos[datetime.getMonth()]
-        d = datetime.getDay()
+        //mo = mos[datetime.getMonth()]
+        mo = datetime.getMonth() + 1
+        d = datetime.getDate()
+        //d = datetime.getDay()
         yr = datetime.getFullYear()
         hour = hour >= 12 ? hour - 12 : hour;
         hour = String(hour).padStart(2,0)
         min = String(min).padStart(2,0)
         s = String(s).padStart(2,0)
         $('.time').text(hour+":"+min+":"+s+" "+ampm)
-        $('.date').text(mo+" "+d+", "+yr)
-            
-            
+        $('.date').text(d + "/" + mo + "/" + yr)
+        //$('.date').text(mo+" "+d+", "+yr)        
     }
+
+
     function _resize_elements(){
         var window_height = $(window).height()
         var nav_height = $('nav').height()
@@ -130,7 +143,7 @@
                         nitem.hide('slow')
                     }else{
                         nitem.show('slow')
-                        speak("NUMERO "+(Math.abs(resp.queue))+resp.name+", Favor Proceder a "+cashier)
+                        speak("NUMERO "+(Math.abs(resp.queue))+resp.name+", Favor Proceder a la "+cashier)
                     }
                 }
             }
