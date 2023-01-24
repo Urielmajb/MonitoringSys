@@ -57,10 +57,11 @@
 // tts.voice = window.speechSynthesis.getVoices()[0] ; 
     
 const tts = new SpeechSynthesisUtterance();
-tts.lang = "es-MX";
 var voices = window.speechSynthesis.getVoices();
-tts.voice = voices.filter(function(voice) { return voice.name == 'Paulina'; })[0];
-//tts.voice = window.speechSynthesis.getVoices().find(voice => voice.startsWith(lang))
+tts.lang = "es-MX";
+tts.default = false;
+//tts.voice = voices.filter(function(voice) { return voice.name == 'Paulina'; })[0];
+tts.voice = window.speechSynthesis.getVoices().find(voice => voice.startsWith(lang))
 
 let notif_audio = new Audio("../audio/ascend.mp3")
 let vid_loop = $('#loop-vid')[0]
