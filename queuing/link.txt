@@ -1,0 +1,2 @@
+https://codepen.io/matt-west/pen/DpmMgE  - Comprueba que idiomas soportan el navegador.
+
