@@ -59,8 +59,9 @@
 const tts = new SpeechSynthesisUtterance();
 var voices = window.speechSynthesis.getVoices();
 tts.lang = "es-MX";
-tts.default = false;
-//tts.voice = voices.filter(function(voice) { return voice.name == 'Paulina'; })[0];
+//tts.voice = window.speechSynthesis.getVoices()[0] ;
+
+//tts.voice = voices.filter(function(voice) { return voice.name == "Microsoft Jorge Online"; })[248];
 tts.voice = window.speechSynthesis.getVoices().find(voice => voice.startsWith(lang))
 
 let notif_audio = new Audio("../audio/ascend.mp3")
@@ -78,7 +79,8 @@ document.querySelector('body').appendChild(notif_audio)
 function speak($text=""){
     if($text == '')
     return false;
-    tts.lang = "es-MX";
+    //tts.lang = "es-MX";
+    //tts.voice = voices.filter(function(voice) { return voice.name == "Microsoft Jorge Online"; })[248];
     tts.text = $text; 
     notif_audio.setAttribute('muted',false)
     notif_audio.play()

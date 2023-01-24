@@ -1,2 +1,11 @@
 https://codepen.io/matt-west/pen/DpmMgE  - Comprueba que idiomas soportan el navegador.
 
+
+console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
+
+speechSynthesis.getVoices().forEach((voice) => {
+  console.log(voice.name, voice.lang)
+})
+
+probar en la consola de devtools en los navegadores.
+https://webplatformcourse.com/bonus/speech-synthesis-api/
