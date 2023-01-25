@@ -43,13 +43,13 @@
 
 <script>
     
-    var websocket = new WebSocket("ws://<?php echo $_SERVER['SERVER_NAME'] ?>:2306/queuing/php-sockets.php"); 
+    var websocket = new WebSocket("ws://<?php echo $_SERVER['SERVER_NAME'] ?>:8080/php-sockets.php"); 
     websocket.onopen = function(event) { 
     console.log('socket is open!')
 		}
     websocket.onclose = function(event){
     console.log('socket has been closed!')
-    var websocket = new WebSocket("ws://<?php echo $_SERVER['SERVER_NAME'] ?>:2306/queuing/php-sockets.php"); 
+    var websocket = new WebSocket("ws://<?php echo $_SERVER['SERVER_NAME'] ?>:8080/php-sockets.php"); 
     };
 
 // let tts = new SpeechSynthesisUtterance();

@@ -3,8 +3,9 @@
 // define('HOST_NAME',"192.168.43.49"); 
 //define('PORT',"2306");
 
-$address="localhost";
-$porti="2306";
+$address="127.0.0.1";
+//$porti="2306";
+$porti="8080";
 $null = NULL;
 
 class _sHandler {
