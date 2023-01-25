@@ -1,0 +1,5 @@
+Gestion de Filas - Nombre C
+Cambiar los nombres de las cajas
+Ahora Atendiendo..
+Cambiar en los demas formularios.
+Requerimientos para implementar esto.
