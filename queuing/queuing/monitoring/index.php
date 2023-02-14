@@ -22,7 +22,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="./../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="./../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="./../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="./../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="./../assets/vendor/quill/quill.snow.css" rel="stylesheet">

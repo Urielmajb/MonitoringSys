@@ -12,9 +12,9 @@
                 <div class="card-body">
                     <div class="fs-1  my-2 fw-bold text-center"><span id="queue">----</span></div>
                 </div>
-                <div class="card-footer">
+                <!-- <div class="card-footer">
 
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center align-items-center" id="action-field">
@@ -64,7 +64,9 @@ function get_queue() {
                     in_queue = resp.data
                 } else {
                     in_queue = {}
-                    alert("No Queue Available")
+                    // alert("No Queue Available")
+                    alert("No hay numeros en cola disponibles")
+
                 }
             } else {
                 alert('An error occured')
@@ -95,7 +97,9 @@ $(function() {
         if (!!in_queue.queue) {
             queue()
         } else {
-            alert("No Queue Available")
+            // alert("No Queue Available")
+            alert("No hay numeros en cola disponibles")
+
         }
     })
 })

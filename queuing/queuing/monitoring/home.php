@@ -1,22 +1,23 @@
 <div class="container-fluid">
-    <center><button class="btn btn-lg btn-warning w-25" id="start" type="button"><i class="bi bi-play-fill"></i><b>&nbsp; Iniciar Monitoreo En vivo<b></button>
-    </center>
+    <center><button class="btn btn-lg btn-warning w-25" id="start" type="button"><i class="bi bi-play-fill"></i><b>&nbsp; Iniciar Monitoreo En vivo<b></button></center>
     
     <div class="d-none" id="monitor-holder">
         <div class="row my-0 mx-0">
-            <div class="col-md-5 d-flex flex-column justify-content-center align-items-center border-end border-dark"
-                id="serving-field">
-                <div class="card col-sm-12 shadow h-100">
-                    <div class="card-header">
-                        <h5 class="card-title text-center">Ahora Atendiendo</h5>
+            <div class="col-md-5 d-flex flex-column justify-content-center align-items-center" id="serving-field">
+
+            
+                <div class="col-sm-12 shadow h-100">
+                    <div class="card card-title">
+                        <h5 class="card-title text-center"><b>Ahora Atendiendo</b></h5>
                     </div>
+                    
                     <div class="card-body h-100">
                         <div id="serving-list" class="list-group overflow-auto">
                             <?php 
                             $cashier = $conn->query("SELECT * FROM `cashier_list` order by `name` asc");
                             while($row = $cashier->fetchArray()):
                             ?>
-                            <div class="list-group-item" data-id="<?php echo $row['cashier_id'] ?>"
+                            <div class="card list-group-item" data-id="<?php echo $row['cashier_id'] ?>"
                                 style="display:none">
                                 <div class="fs-5 fw-2 cashier-name border-bottom border-info"><?php echo $row['name'] ?>
                                 </div>
@@ -28,7 +29,8 @@
                 </div>
             </div>
 
-            <div class="col-md-7 d-flex flex-column justify-content-center align-items-center bg-dark bg-gradient text-light"
+          
+            <div class="card col-md-7 d-flex flex-column justify-content-center align-items-center text-light"
                 id="action-field">
                 <div class="col-auto flex-grow-1">
                     <?php 
@@ -37,11 +39,16 @@
                 ?>
                     <video id="loop-vid" src="./../video/<?php echo $video ?>" loop class="w-100 h-100"></video>
                 </div>
+
+                <div class="card-title">
                 <div id="datetimefield" class="w-100  col-auto">
                     <div class="fs-1 text-center time fw-bold"></div>
                     <div class="fs-5 text-center date fw-bold"></div>
                 </div>
-            </div>
+                </div>
+
+                </div>
+            
         </div>
     </div>
     

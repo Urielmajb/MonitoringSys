@@ -244,9 +244,17 @@ h6 {
 .card-footer {
   border-color: #ebeef4;
   background-color: #fff;
-  color: #798eb3;
+  color: #012970;
   padding: 15px;
 }
+
+
+/* .card-footer {
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 5px solid rgba(0, 0, 0, 0.125);
+} */
+
 
 .card-title {
   padding: 20px 0 15px 0;
@@ -260,6 +268,16 @@ h6 {
   color: #899bbd;
   font-size: 14px;
   font-weight: 400;
+}
+
+.card-foo {
+  border-top: 5px solid rgba(0, 0, 0, 0.125);
+  padding: 0.5rem 1rem;
+  font-size: 18px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
+
 }
 
 .card-body {
