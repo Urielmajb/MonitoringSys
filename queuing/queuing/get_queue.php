@@ -30,11 +30,16 @@ if(isset($_GET['id'])){
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                    <div class="fs-1 fw-bold text-center">
-                        <?php echo $queue ?>
+                        <div class="fs-1 fw-bold text-center">
+                            <?php echo $queue ?>
+                        </div>
+                        <center><?php echo $customer_name ?></center>
                     </div>
-                    <center><?php echo $customer_name ?></center>
-                    </div>
+
+                    <div id="datetimefield" class="w-100  col-auto">
+                    <div class="text-center time fw-bold"></div>
+                    <div class="text-center date fw-bold"></div>
+                </div>
                 </div>
             </div>
             <!-- <div class="card border-0 border-left border-start rounded-0 border-5 border-info">
@@ -70,25 +75,57 @@ if(isset($_GET['id'])){
 
 
 <script>
-$(function() {
-    $('#print').click(function() {
-        var _el = $('<div>')
-        var _h = $('head').clone()
-        var _p = $('#outprint').clone()
-        // _h.find('title').text("Numero de Fila - Imprimir")
-        _h.find('title').text("Queue Number - Print")
-        _el.append(_h)
-        _el.append(_p)
-        var nw = window.open('', '_blank', 'width=700,height=500,top=75,left=200')
-        nw.document.write(_el.html())
-        nw.document.close()
-        setTimeout(() => {
-            nw.print()
-            setTimeout(() => {
-                nw.close()
-                $('#uni_modal').modal('hide')
-            }, 200);
-        }, 500);
+$(function(){
+        setInterval(() => {
+            time_loop()
+        }); 
     })
-})
+
+    function time_loop(){
+        var hour,min,ampm,mo,d,yr,s;
+        var datetime = new Date();
+        let mos = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Deciembre']
+        const weekday = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
+        let dia = weekday[datetime.getDay()];
+        hour = datetime.getHours()
+        min = datetime.getMinutes()
+        s = datetime.getSeconds()
+        ampm = hour >= 12 ? "PM" : "AM";
+        mo = mos[datetime.getMonth()]
+        //mo = datetime.getMonth() + 1
+        //d = datetime.getDay()
+        d = datetime.getDate()
+        yr = datetime.getFullYear()
+        hour = hour >= 12 ? hour - 12 : hour;
+        hour = String(hour).padStart(2,0)
+        min = String(min).padStart(2,0)
+        s = String(s).padStart(2,0)
+        $('.time').text(hour+":"+min+":"+s+" "+ampm)
+        // $('.date').text(mo+" "+d+", "+yr)
+        $('.date').text(dia + ", " + d + " de " + mo + " de " + yr)
+    }
+
+    $(function()
+    {
+        $('#print').click(function(){
+            var _el = $('<div>')
+            var _h = $('head').clone()
+            var _p = $('#outprint').clone()
+            _h.find('title').text("Atención al público")
+            _el.append(_h)
+            _el.append(_p)
+                var nw = window.open('','_blank','width=700,height=500,top=75,left=200')
+                nw.document.write(_el.html())
+                nw.document.close()
+                setTimeout(() => {
+                    nw.print()
+                    setTimeout(() => {
+                        nw.close()
+                        $('#uni_modal').modal('hide') 
+                    }, 200);
+                }, 500);
+        })
+    })
+
+
 </script>

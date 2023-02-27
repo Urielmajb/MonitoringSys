@@ -16,7 +16,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
     <meta content="" name="description">
     <meta content="" name="keywords">
     <link href="./assets/img/escudo.png" rel="icon">
-    
+
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -39,7 +39,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
     <!-- <link rel="stylesheet" href="./select2/css/select2.min.css"> -->
 
     <script src="./js/jquery-3.6.0.min.js"></script>
-    <script src="./js/popper.min.js"></script>
+    <!-- <script src="./js/popper.min.js"></script> -->
     <script src="./js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./DataTables/datatables.min.css">
     <script src="./DataTables/datatables.min.js"></script>
@@ -237,8 +237,10 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             </div>
         </div>
     </div> -->
+    </body>
 
     <script>
+
     $(function() {
         $('#queue-form').submit(function(e) {
             e.preventDefault()
@@ -285,7 +287,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             })
         })
     })
+
     </script>
-</body>
 
 </html>

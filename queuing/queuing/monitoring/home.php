@@ -105,27 +105,52 @@ function speak($text = "") {
     }, 500);
 }
 
-function time_loop() {
-    var hour, min, ampm, mo, d, yr, s;
-    //let mos = ['','January','Febuary','March','April','May','June','July','August','September','October','November','December']
-    var datetime = new Date();
-    hour = datetime.getHours()
-    min = datetime.getMinutes()
-    s = datetime.getSeconds()
-    ampm = hour >= 12 ? "PM" : "AM";
-    //mo = mos[datetime.getMonth()]
-    mo = datetime.getMonth() + 1
-    d = datetime.getDate()
-    //d = datetime.getDay()
-    yr = datetime.getFullYear()
-    hour = hour >= 12 ? hour - 12 : hour;
-    hour = String(hour).padStart(2, 0)
-    min = String(min).padStart(2, 0)
-    s = String(s).padStart(2, 0)
-    $('.time').text(hour + ":" + min + ":" + s + " " + ampm)
-    $('.date').text(d + "/" + mo + "/" + yr)
-    //$('.date').text(mo+" "+d+", "+yr)        
-}
+
+function time_loop(){
+        var hour,min,ampm,mo,d,yr,s;
+        var datetime = new Date();
+        let mos = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Deciembre']
+        const weekday = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
+        let dia = weekday[datetime.getDay()];
+        hour = datetime.getHours()
+        min = datetime.getMinutes()
+        s = datetime.getSeconds()
+        ampm = hour >= 12 ? "PM" : "AM";
+        mo = mos[datetime.getMonth()]
+        //mo = datetime.getMonth() + 1
+        //d = datetime.getDay()
+        d = datetime.getDate()
+        yr = datetime.getFullYear()
+        hour = hour >= 12 ? hour - 12 : hour;
+        hour = String(hour).padStart(2,0)
+        min = String(min).padStart(2,0)
+        s = String(s).padStart(2,0)
+        $('.time').text(hour+":"+min+":"+s+" "+ampm)
+        // $('.date').text(mo+" "+d+", "+yr)
+        $('.date').text(dia + ", " + d + " de " + mo + " de " + yr)
+    }
+
+// function time_loop() {
+//     var hour, min, ampm, mo, d, yr, s;
+//     //let mos = ['','January','Febuary','March','April','May','June','July','August','September','October','November','December']
+//     var datetime = new Date();
+//     hour = datetime.getHours()
+//     min = datetime.getMinutes()
+//     s = datetime.getSeconds()
+//     ampm = hour >= 12 ? "PM" : "AM";
+//     //mo = mos[datetime.getMonth()]
+//     mo = datetime.getMonth() + 1
+//     d = datetime.getDate()
+//     //d = datetime.getDay()
+//     yr = datetime.getFullYear()
+//     hour = hour >= 12 ? hour - 12 : hour;
+//     hour = String(hour).padStart(2, 0)
+//     min = String(min).padStart(2, 0)
+//     s = String(s).padStart(2, 0)
+//     $('.time').text(hour + ":" + min + ":" + s + " " + ampm)
+//     $('.date').text(d + "/" + mo + "/" + yr)
+//     //$('.date').text(mo+" "+d+", "+yr)        
+// }
 
 
 function _resize_elements() {
@@ -161,8 +186,9 @@ function new_queue($cashier_id, $qid) {
                     nitem.hide('slow')
                 } else {
                     nitem.show('slow')
-                    speak("NUMERO " + (Math.abs(resp.queue)) + resp.name + ", Favor Proceder a la " +
-                        cashier)
+                    speak("Número "+(Math.abs(resp.queue))+resp.name+ " , " + " favor proceder al "+ cashier) 
+                    // speak("Número " + (Math.abs(resp.queue)) + resp.name + ", favor proceder a la " +
+                    //     cashier)
                 }
             }
         }
