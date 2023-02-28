@@ -30,10 +30,12 @@ if(isset($_GET['id'])){
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <center><b><p>Atencion al publico</p></b></center>
                         <div class="fs-1 fw-bold text-center">
                             <?php echo $queue ?>
                         </div>
-                        <center><?php echo $customer_name ?></center>
+                        <center><b><?php echo $customer_name ?></b></center>
+                        <center><b>No. trámites: <?php echo $no_tram ?></b></center>
                     </div>
 
                     <div id="datetimefield" class="w-100  col-auto">

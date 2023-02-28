@@ -39,6 +39,8 @@ Class DBConnection extends SQLite3{
             `customer_name` Text NOT NULL,
             `status` INTEGER NOT NULL DEFAULT 0,
             `date_created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            -- `no_tram` TEXT 
+
         )");
 
         // $this->exec("CREATE TABLE IF NOT EXISTS `queue_list` (

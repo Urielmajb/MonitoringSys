@@ -246,7 +246,7 @@ Class Actions extends DBConnection{
 
         $_POST['queue'] = $code;
         extract($_POST);
-        $sql = "INSERT INTO `queue_list` (`queue`,`customer_name`) VALUES('{$queue}','{$customer_name}')";
+        $sql = "INSERT INTO `queue_list` (`queue`,`customer_name`,`no_tram` ) VALUES('{$queue}','{$customer_name}','{$no_tram}' )";
         $save = $this->query($sql);
         if($save){
             $resp['status'] = 'success';
@@ -275,7 +275,9 @@ Class Actions extends DBConnection{
 
     function next_queue(){
         extract($_POST);
-        $get = $this->query("SELECT queue_id,`queue`,customer_name FROM `queue_list` where status = 0 and date(date_created) = '".date("Y-m-d")."' order by queue_id asc  limit 1");
+        $get = $this->query("SELECT queue_id,`queue`,customer_name, no_tram FROM `queue_list` where status = 0 and date(date_created) = '".date("Y-m-d")."' order by queue_id asc  limit 1");
+
+        // $get = $this->query("SELECT queue_id,`queue`,customer_name FROM `queue_list` where status = 0 and date(date_created) = '".date("Y-m-d")."' order by queue_id asc  limit 1");
         @$res = $get->fetchArray();
         $resp['status']='success';
         if($res){

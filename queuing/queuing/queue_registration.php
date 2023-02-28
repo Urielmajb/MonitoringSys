@@ -104,7 +104,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
                             <!-- Card with titles, buttons -->
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><b>Obtener el número</b></h5>
+                                    <h5 class="card-title"><b>Obtener número</b></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"></h6>
                                     <form action="" id="queue-form">
                                         <div class="form-group">
@@ -115,7 +115,16 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
                                                 autocomplete="off"
                                                 class="form-control form-control-lg rounded-0 border-0 border-bottom"
                                                 required>
+                                            <br></br>
+                                            <label for="no_tram" class="control-label text-info">
+                                                <b>Numero de tramite a realizar </b>
+                                            </label>
+                                            <input type="text" id="no_tram" name="no_tram" autofocus autocomplete="off"
+                                                class="form-control form-control-lg rounded-0 border-0 border-bottom"
+                                                required>
                                         </div>
+                                        <br></br>
+
                                         <div class="form-group text-center my-2">
                                             <button class="btn btn-warning" type='submit'>
                                                 <b>Conseguir Número</b></button>
@@ -237,57 +246,55 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             </div>
         </div>
     </div> -->
-    </body>
+</body>
 
-    <script>
+<script>
+$(function() {
+    $('#queue-form').submit(function(e) {
+        e.preventDefault()
+        var _this = $(this)
+        _this.find('.pop-msg').remove()
+        var el = $('<div>')
+        el.addClass('alert pop-msg')
+        el.hide()
+        _this.find('button[type="submit"]').attr('disabled', true)
+        $.ajax({
+            url: './Actions.php?a=save_queue',
+            method: 'POST',
+            data: _this.serialize(),
+            dataType: 'JSON',
+            error: err => {
+                console.log(err)
+                el.addClass("alert-danger")
+                el.text("An error occured while saving data.")
+                _this.find('button[type="submit"]').attr('disabled', false)
+                _this.prepend(el)
+                el.show('slow')
+            },
+            success: function(resp) {
+                if (resp.status == 'success') {
+                    // uni_modal("Your Queue", "get_queue.php?success=true&id=" + resp.id)
 
-    $(function() {
-        $('#queue-form').submit(function(e) {
-            e.preventDefault()
-            var _this = $(this)
-            _this.find('.pop-msg').remove()
-            var el = $('<div>')
-            el.addClass('alert pop-msg')
-            el.hide()
-            _this.find('button[type="submit"]').attr('disabled', true)
-            $.ajax({
-                url: './Actions.php?a=save_queue',
-                method: 'POST',
-                data: _this.serialize(),
-                dataType: 'JSON',
-                error: err => {
-                    console.log(err)
-                    el.addClass("alert-danger")
-                    el.text("An error occured while saving data.")
-                    _this.find('button[type="submit"]').attr('disabled', false)
+                    uni_modal("Tu numero", "get_queue.php?success=true&id=" + resp.id)
+                    $('#uni_modal').on('hide.bs.modal', function(e) {
+                        location.reload()
+                    })
+                } else if (resp.status = 'failed' && !!resp.msg) {
+                    el.addClass('alert-' + resp.status)
+                    el.text(resp.msg)
                     _this.prepend(el)
                     el.show('slow')
-                },
-                success: function(resp) {
-                    if (resp.status == 'success') {
-                        // uni_modal("Your Queue", "get_queue.php?success=true&id=" + resp.id)
-
-                        uni_modal("Tu numero", "get_queue.php?success=true&id=" + resp.id)
-                        $('#uni_modal').on('hide.bs.modal', function(e) {
-                            location.reload()
-                        })
-                    } else if (resp.status = 'failed' && !!resp.msg) {
-                        el.addClass('alert-' + resp.status)
-                        el.text(resp.msg)
-                        _this.prepend(el)
-                        el.show('slow')
-                    } else {
-                        el.addClass('alert-' + resp.status)
-                        el.text("An Error occured.")
-                        _this.prepend(el)
-                        el.show('slow')
-                    }
-                    _this.find('button[type="submit"]').attr('disabled', false)
+                } else {
+                    el.addClass('alert-' + resp.status)
+                    el.text("An Error occured.")
+                    _this.prepend(el)
+                    el.show('slow')
                 }
-            })
+                _this.find('button[type="submit"]').attr('disabled', false)
+            }
         })
     })
-
-    </script>
+})
+</script>
 
 </html>
